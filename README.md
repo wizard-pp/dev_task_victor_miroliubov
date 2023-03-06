@@ -35,4 +35,5 @@ CONFIG
 ------
 1. Set database connection at ```/config/db.php```.
 2. Set docker local ip at ```/config/web.php``` at section ```modules.gii.allowedIPs``` if you wanna use gii.
-3. Profit!
+3. Apply database migrations.
+4. Profit!
