@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Url;
 use app\models\Order;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 

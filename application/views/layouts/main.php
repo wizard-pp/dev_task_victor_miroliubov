@@ -5,9 +5,9 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
-use yii\bootstrap5\Html;
 use app\widgets\Nav;
 use app\widgets\NavBar;
+use yii\bootstrap5\Html;
 
 AppAsset::register($this);
 
