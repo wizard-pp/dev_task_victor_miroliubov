@@ -1,14 +1,14 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\order\controllers;
 
-use app\services\OrderService;
+use app\modules\order\services\OrderService;
 use yii\web\Controller;
 
 /**
- * OrderController implements the CRUD actions for Order model.
+ * Default controller for the `order` module
  */
-class OrderController extends Controller
+class DefaultController extends Controller
 {
     protected OrderService $service;
 

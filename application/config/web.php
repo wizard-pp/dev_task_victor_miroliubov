@@ -20,7 +20,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\modules\order\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -65,6 +65,11 @@ $config = [
 		],
     ],
     'params' => $params,
+    'modules' => [
+        'order' => [
+            'class' => 'app\modules\order\Module',
+        ],
+    ]
 ];
 
 if (YII_ENV_DEV) {

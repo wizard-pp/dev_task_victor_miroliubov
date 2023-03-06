@@ -1,10 +1,10 @@
 <?php
 
-namespace app\services;
+namespace app\modules\order\services;
 
-use app\models\Order;
-use app\models\OrderSearch;
-use app\models\Service;
+use app\modules\order\models\Order;
+use app\modules\order\models\OrderSearch;
+use app\modules\order\models\Service;
 use Yii;
 use yii2tech\csvgrid\CsvGrid;
 

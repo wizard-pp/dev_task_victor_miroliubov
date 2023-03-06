@@ -54,7 +54,7 @@ NavBar::begin([
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => [
-        ['label' => Yii::t('app', 'Orders'), 'url' => ['/order/index']],
+        ['label' => Yii::t('app', 'Orders'), 'url' => ['/order/default/index']],
     ]
 ]);
 NavBar::end();

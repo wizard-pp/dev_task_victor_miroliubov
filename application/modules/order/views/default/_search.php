@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Order;
+use app\modules\order\models\Order;
 use yii\helpers\Url;
 
 /** @var yii\web\View $this */
