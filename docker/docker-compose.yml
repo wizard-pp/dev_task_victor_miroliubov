@@ -2,29 +2,31 @@ version: '2'
 services:
   nginx:
     image: nginx:latest
+    container_name: ${DOCKER_CONTAINER_NGINX}
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./../:/app:delegated
       - ./nginx/logs:/var/log/nginx
     networks:
       - default
     links:
-      - php
+      - ${DOCKER_CONTAINER_PHP}
   php:
+    container_name: ${DOCKER_CONTAINER_PHP}
     build:
       context: php
       dockerfile: php.Dockerfile
     links:
-      - mysql
+      - ${DOCKER_CONTAINER_MYSQL}
     volumes:
       - ./../:/app
   mysql:
-    platform: linux/x86_64
     image: mysql:5.7
+    platform: linux/x86_64
+    container_name: ${DOCKER_CONTAINER_MYSQL}
     restart: always
     environment:
       - MYSQL_DATABASE=${DB_NAME}
