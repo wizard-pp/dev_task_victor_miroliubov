@@ -35,9 +35,9 @@ application/tests/_support/_generated
 #vagrant folder
 application/.vagrant
 
-docker/mysql/data/
+docker/mysql/data/*
 docker/mysql/logs
-docker/mysql/var/*
+docker/mysql/var/
 docker/nginx/logs
 docker/nginx/default.conf
 docker/.env

@@ -27,13 +27,15 @@ The minimum requirement by this project template that your Web server supports P
 INSTALLATION
 ------------
 
+Copy database structure and data files to ```docker/mysql/data/``` and then:
+
 ```
 cp application/.env_example application/.env
 cp docker/nginx/default.conf_example docker/nginx/default.conf
 cd docker
 docker-compose up -d
-docker-compose exec php application/composer.phar install
-docker-compose exec php php application/yii migrate
+docker-compose exec php composer.phar install
+docker-compose exec php php yii migrate
 ```
 
 CONFIG

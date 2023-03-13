@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m230303_132122_add_indexes_to_orders_table
+ * Class m230313_090531_add_indexes_to_orders_table
  */
-class m230303_132122_add_indexes_to_orders_table extends Migration
+class m230313_090531_add_indexes_to_orders_table extends Migration
 {
     /**
      * {@inheritdoc}

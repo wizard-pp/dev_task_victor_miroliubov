@@ -4,7 +4,7 @@ server {
 
     listen 80; ## listen for ipv4
 
-    root   /app/application/web;
+    root   /var/www/application/web;
     index  index.php;
 
     access_log /var/log/nginx/access.log;
