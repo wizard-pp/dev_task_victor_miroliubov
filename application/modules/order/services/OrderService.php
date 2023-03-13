@@ -48,19 +48,12 @@ class OrderService
 
         $totalCount = Order::find()->count();
 
-        if ($totalCount < $dataProvider->pagination->pageSize) {
-            $summaryContent = '{totalCount}';
-        } else {
-            $summaryContent = '{begin} to {end} of {totalCount}';
-        }
-
         return [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'services' => $services,
             'modes' => $modes,
             'totalCount' => $totalCount,
-            'summaryContent' => $summaryContent,
         ];
     }
 

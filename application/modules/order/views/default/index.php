@@ -14,6 +14,11 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
+if ($totalCount < $dataProvider->pagination->pageSize) {
+    $summaryContent = '{totalCount}';
+} else {
+    $summaryContent = Yii::t('app', '{begin} to {end} of {totalCount}');
+}
 ?>
 
 <?php echo $this->render('_search', ['model' => $searchModel]); ?>

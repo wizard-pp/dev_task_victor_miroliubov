@@ -42,9 +42,15 @@ $searchValue = $queryParams['OrderSearch']['id'] ?? $queryParams['OrderSearch'][
                 <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="search-type">
-              <option value="OrderSearch[id]" <?php if (!empty($queryParams['OrderSearch']['id'])): ?> selected="" <?php endif; ?>>Order ID</option>
-              <option value="OrderSearch[link]" <?php if (!empty($queryParams['OrderSearch']['link'])): ?> selected="" <?php endif; ?>>Link</option>
-              <option value="OrderSearch[username]" <?php if (!empty($queryParams['OrderSearch']['username'])): ?> selected="" <?php endif; ?>>Username</option>
+              <option value="OrderSearch[id]" <?php if (!empty($queryParams['OrderSearch']['id'])): ?> selected="" <?php endif; ?>>
+                  <?= Yii::t('app', 'Order ID') ?>
+              </option>
+              <option value="OrderSearch[link]" <?php if (!empty($queryParams['OrderSearch']['link'])): ?> selected="" <?php endif; ?>>
+                  <?= Yii::t('app', 'Link') ?>
+              </option>
+              <option value="OrderSearch[username]" <?php if (!empty($queryParams['OrderSearch']['username'])): ?> selected="" <?php endif; ?>>
+                  <?= Yii::t('app', 'Username') ?>
+              </option>
             </select>
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>

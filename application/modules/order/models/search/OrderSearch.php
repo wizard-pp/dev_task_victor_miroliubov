@@ -11,6 +11,8 @@ use yii\data\ActiveDataProvider;
  */
 class OrderSearch extends Order
 {
+    const PAGE_SIZE = 100;
+
     public string $user;
     public string $service;
     public ?string $username = null;
@@ -53,7 +55,7 @@ class OrderSearch extends Order
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 100,
+                'pageSize' => self::PAGE_SIZE,
             ],
             'sort' => false
         ]);
