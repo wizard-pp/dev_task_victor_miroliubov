@@ -2,8 +2,10 @@
 
 namespace orders\models;
 
+use orders\models\queries\ServiceQuery;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "services".
@@ -11,7 +13,7 @@ use yii\db\ActiveQuery;
  * @property int $id
  * @property string $name
  */
-class Service extends \yii\db\ActiveRecord
+class Service extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -51,5 +53,14 @@ class Service extends \yii\db\ActiveRecord
     public function getOrders(): ActiveQuery
     {
         return $this->hasMany(Order::class, ['service_id' => 'id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return ServiceQuery the active query used by this AR class.
+     */
+    public static function find(): ServiceQuery
+    {
+        return new ServiceQuery(get_called_class());
     }
 }

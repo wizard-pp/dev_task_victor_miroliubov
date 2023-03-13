@@ -54,6 +54,18 @@ $config = [
                 ],
 			]
 		],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
     'modules' => [
@@ -61,6 +73,7 @@ $config = [
             'class' => 'orders\Module',
         ],
     ],
+    'language' => 'en-US',
 ];
 
 if (YII_ENV_DEV) {

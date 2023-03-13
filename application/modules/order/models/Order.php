@@ -2,8 +2,10 @@
 
 namespace orders\models;
 
+use orders\models\queries\OrderQuery;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "orders".
@@ -17,7 +19,7 @@ use yii\db\ActiveQuery;
  * @property int $created_at
  * @property int $mode 0 - Manual, 1 - Auto
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends ActiveRecord
 {
     const STATUS_PENDING = 0;
     const STATUS_IN_PROGRESS = 1;
@@ -132,5 +134,14 @@ class Order extends \yii\db\ActiveRecord
     public function getModeLabel(): string
     {
         return $this->getModes()[$this->mode];
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return OrderQuery the active query used by this AR class.
+     */
+    public static function find(): OrderQuery
+    {
+        return new OrderQuery(get_called_class());
     }
 }

@@ -2,7 +2,9 @@
 
 namespace orders\models;
 
+use orders\models\queries\UserQuery;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "users".
@@ -11,7 +13,7 @@ use Yii;
  * @property string $first_name
  * @property string $last_name
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -52,5 +54,14 @@ class User extends \yii\db\ActiveRecord
     public function getFullName(): string
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return UserQuery the active query used by this AR class.
+     */
+    public static function find(): UserQuery
+    {
+        return new UserQuery(get_called_class());
     }
 }

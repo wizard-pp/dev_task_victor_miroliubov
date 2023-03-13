@@ -38,6 +38,7 @@ class OrderService
             ->distinct()
             ->all();
 
+        $modes = [];
         foreach ($existedModes as $mode) {
             $modes[] = [
                 'id' => $mode->mode,

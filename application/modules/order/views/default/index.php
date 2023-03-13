@@ -12,7 +12,7 @@ use yii\grid\GridView;
 /** @var int $totalCount */
 /** @var string $summaryContent */
 
-$this->title = 'Orders';
+$this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
