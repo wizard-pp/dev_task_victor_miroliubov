@@ -34,7 +34,7 @@ cp application/.env_example application/.env
 cp docker/nginx/default.conf_example docker/nginx/default.conf
 cd docker
 docker-compose up -d
-docker-compose exec php composer.phar install
+docker-compose exec php ./composer.phar install
 docker-compose exec php php yii migrate
 ```
 

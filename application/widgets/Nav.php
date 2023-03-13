@@ -5,9 +5,10 @@ namespace app\widgets;
 use Throwable;
 use yii\base\InvalidConfigException;
 use yii\bootstrap5\Html;
+use yii\bootstrap5\Nav as BaseNav;
 use yii\helpers\ArrayHelper;
 
-class Nav extends \yii\bootstrap5\Nav
+class Nav extends BaseNav
 {
     /**
      * Renders a widget's item.

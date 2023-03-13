@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\order\controllers;
+namespace orders\controllers;
 
-use app\modules\order\services\OrderService;
+use orders\services\OrderService;
 use yii\web\Controller;
 
 /**
@@ -12,6 +12,11 @@ class DefaultController extends Controller
 {
     protected OrderService $service;
 
+    /**
+     * @param $id
+     * @param $module
+     * @param $config
+     */
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
@@ -29,6 +34,12 @@ class DefaultController extends Controller
         return $this->render('index', $this->service->index($this->request->queryParams));
     }
 
+    /**
+     * Exports orders to .csv file
+     *
+     * @return \yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionCsv(): \yii\web\Response
     {
         $exporter = $this->service->csv($this->request->queryParams);

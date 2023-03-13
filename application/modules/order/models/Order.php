@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\order\models;
+namespace orders\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "orders".
@@ -64,16 +65,31 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getUser(): \yii\db\ActiveQuery
+    /**
+     * Getting User of current Order.
+     *
+     * @return ActiveQuery
+     */
+    public function getUser(): ActiveQuery
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
-    public function getService(): \yii\db\ActiveQuery
+    /**
+     * Getting Service of current Order
+     *
+     * @return ActiveQuery
+     */
+    public function getService(): ActiveQuery
     {
         return $this->hasOne(Service::class, ['id' => 'service_id']);
     }
 
+    /**
+     * Translated statuses list.
+     *
+     * @return array
+     */
     protected function getStatuses(): array
     {
         return [
@@ -85,6 +101,11 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Translated modes list.
+     *
+     * @return array
+     */
     protected function getModes(): array
     {
         return [
@@ -93,11 +114,21 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Getting translated status for current Order.
+     *
+     * @return string
+     */
     public function getStatusLabel(): string
     {
         return $this->getStatuses()[$this->status];
     }
 
+    /**
+     * Getting translated mode for current Order.
+     *
+     * @return string
+     */
     public function getModeLabel(): string
     {
         return $this->getModes()[$this->mode];

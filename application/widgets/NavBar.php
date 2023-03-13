@@ -4,9 +4,10 @@ namespace app\widgets;
 
 use Yii;
 use yii\bootstrap5\Html;
+use yii\bootstrap5\NavBar as BaseNavBar;
 use yii\helpers\ArrayHelper;
 
-class NavBar extends \yii\bootstrap5\NavBar
+class NavBar extends BaseNavBar
 {
     /**
      * Renders collapsible toggle button.

@@ -1,11 +1,11 @@
 <?php
 
-use app\modules\order\models\Order;
-use app\widgets\ButtonDropdownFilter;
+use orders\models\Order;
+use orders\widgets\ButtonDropdownFilter;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var \app\modules\order\models\search\OrderSearch $searchModel */
+/** @var orders\models\search\OrderSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 /** @var array $services */
 /** @var array $modes */

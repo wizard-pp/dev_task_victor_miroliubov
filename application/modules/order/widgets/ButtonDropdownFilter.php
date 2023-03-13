@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\widgets;
+namespace orders\widgets;
 
 use Throwable;
 use Yii;

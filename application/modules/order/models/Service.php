@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\order\models;
+namespace orders\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "services".
@@ -42,7 +43,12 @@ class Service extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getOrders(): \yii\db\ActiveQuery
+    /**
+     * Getting orders related to current Service.
+     *
+     * @return ActiveQuery
+     */
+    public function getOrders(): ActiveQuery
     {
         return $this->hasMany(Order::class, ['service_id' => 'id']);
     }

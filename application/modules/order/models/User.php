@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\order\models;
+namespace orders\models;
 
 use Yii;
 
@@ -44,6 +44,11 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Getting user's full name.
+     *
+     * @return string
+     */
     public function getFullName(): string
     {
         return $this->first_name . ' ' . $this->last_name;

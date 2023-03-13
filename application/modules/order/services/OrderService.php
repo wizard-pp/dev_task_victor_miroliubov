@@ -1,15 +1,21 @@
 <?php
 
-namespace app\modules\order\services;
+namespace orders\services;
 
-use app\modules\order\models\Order;
-use app\modules\order\models\search\OrderSearch;
-use app\modules\order\models\Service;
+use orders\models\Order;
+use orders\models\search\OrderSearch;
+use orders\models\Service;
 use Yii;
 use yii2tech\csvgrid\CsvGrid;
 
 class OrderService
 {
+    /**
+     * Order's index page setup.
+     *
+     * @param array $requestData
+     * @return array of index page params
+     */
     public function index(array $requestData): array
     {
         $searchModel = new OrderSearch();
@@ -57,6 +63,12 @@ class OrderService
         ];
     }
 
+    /**
+     * Setup CsvGrid for orders exporting to csv.
+     *
+     * @param array $requestData
+     * @return CsvGrid for orders
+     */
     public function csv(array $requestData): CsvGrid
     {
         ini_set('max_execution_time', 300);

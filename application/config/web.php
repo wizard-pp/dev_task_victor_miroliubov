@@ -13,14 +13,13 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'FtHigA_4BMyjfHR8zNLKgAP6OzGhpy9K',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\modules\order\models\User',
+            'identityClass' => 'orders\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -42,14 +41,6 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
         'assetManager' => [
             'bundles' => [
 				'yii\bootstrap5\BootstrapAsset' => [
@@ -67,7 +58,7 @@ $config = [
     'params' => $params,
     'modules' => [
         'order' => [
-            'class' => 'app\modules\order\Module',
+            'class' => 'orders\Module',
         ],
     ],
 ];
@@ -77,14 +68,11 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
         'allowedIPs' => ['127.0.0.1', '::1', DOCKER_LOCAL_IP],
     ];
 }
