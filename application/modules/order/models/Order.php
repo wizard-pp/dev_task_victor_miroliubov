@@ -47,6 +47,21 @@ class Order extends ActiveRecord
             [['user_id', 'link', 'quantity', 'service_id', 'status', 'created_at', 'mode'], 'required'],
             [['user_id', 'quantity', 'service_id', 'status', 'created_at', 'mode'], 'integer'],
             [['link'], 'string', 'max' => 300],
+            ['user_id', 'exists', 'targetRelation' => 'user'],
+            ['service_id', 'exists', 'targetRelation' => 'service'],
+            ['status', 'in', 'range' => [
+                self::STATUS_PENDING,
+                self::STATUS_IN_PROGRESS,
+                self::STATUS_COMPLETED,
+                self::STATUS_CANCELED,
+                self::STATUS_FAIL,
+            ]],
+            ['mode', 'in', 'range' => [
+                self::MODE_MANUAL,
+                self::MODE_AUTO,
+            ]],
+            ['quantity', 'integer'],
+            ['created_at', 'integer'],
         ];
     }
 
