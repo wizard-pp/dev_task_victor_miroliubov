@@ -28,13 +28,20 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
     'controllerMap' => [
+        // Common migrations for the whole application
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => ['app\migrations'],
+            'migrationTable' => 'migration',
+            'migrationPath' => '@app/../migrations',
+        ],
+        /*
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
+        */
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {

@@ -18,12 +18,12 @@ $queryParams[0] = '/' . Yii::$app->controller->getRoute();
             <?= Yii::t('app', 'All orders') ?>
         </a>
     </li>
-    <?php foreach (Order::$statuses as $status => $label): ?>
-        <?php $targetQueryParams = array_replace_recursive($queryParams, ['OrderSearch' => ['status' => $status]]); ?>
-        <?php $isActive = isset($orderSearch['status']) && $orderSearch['status'] == $status; ?>
+    <?php foreach (Order::find()->select('status')->distinct()->all() as $status): ?>
+        <?php $targetQueryParams = array_replace_recursive($queryParams, ['OrderSearch' => ['status' => $status->status]]); ?>
+        <?php $isActive = isset($orderSearch['status']) && $orderSearch['status'] == $status->status; ?>
         <li <?php if ($isActive): ?> class="active" <?php endif; ?>>
             <a href="<?= Url::toRoute($targetQueryParams) ?>">
-                <?= Yii::t('app', $label) ?>
+                <?= $status->statusLabel ?>
             </a>
         </li>
     <?php endforeach; ?>

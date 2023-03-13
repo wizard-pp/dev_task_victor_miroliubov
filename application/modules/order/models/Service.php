@@ -2,6 +2,8 @@
 
 namespace app\modules\order\models;
 
+use Yii;
+
 /**
  * This is the model class for table "services".
  *
@@ -35,8 +37,8 @@ class Service extends \yii\db\ActiveRecord
     public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
         ];
     }
 

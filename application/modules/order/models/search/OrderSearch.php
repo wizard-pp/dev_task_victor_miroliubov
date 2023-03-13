@@ -1,7 +1,8 @@
 <?php
 
-namespace app\modules\order\models;
+namespace app\modules\order\models\search;
 
+use app\modules\order\models\Order;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

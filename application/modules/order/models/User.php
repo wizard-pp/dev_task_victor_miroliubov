@@ -2,6 +2,8 @@
 
 namespace app\modules\order\models;
 
+use Yii;
+
 /**
  * This is the model class for table "users".
  *
@@ -36,9 +38,9 @@ class User extends \yii\db\ActiveRecord
     public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
+            'id' => Yii::t('app', 'ID'),
+            'first_name' => Yii::t('app', 'First Name'),
+            'last_name' => Yii::t('app', 'Last Name'),
         ];
     }
 

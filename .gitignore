@@ -35,7 +35,7 @@ application/tests/_support/_generated
 #vagrant folder
 application/.vagrant
 
-docker/mysql/docker-entrypoint-initdb.d/
+docker/mysql/data/
 docker/mysql/logs
 docker/mysql/var/*
 docker/nginx/logs

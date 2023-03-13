@@ -5,7 +5,7 @@ use app\widgets\ButtonDropdownFilter;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var \app\modules\order\models\OrderSearch $searchModel */
+/** @var \app\modules\order\models\search\OrderSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 /** @var array $services */
 /** @var array $modes */
@@ -60,9 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'header' => Yii::t('app', 'Status'),
-            'content' => function ($model) {
-                return Yii::t('app', Order::$statuses[$model->status]);
-            },
+            'value' => 'statusLabel',
         ],
         [
             'attribute' => 'mode',
@@ -73,9 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
             ]),
             'headerOptions' => ['class' => 'dropdown-th'],
-            'content' => function ($model) {
-                return Yii::t('app', Order::$modes[$model->mode]);
-            }
+            'value' => 'modeLabel',
         ],
         [
             'attribute' => 'created_at',

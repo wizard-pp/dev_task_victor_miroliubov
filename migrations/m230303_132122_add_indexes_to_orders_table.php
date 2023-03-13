@@ -12,25 +12,23 @@ class m230303_132122_add_indexes_to_orders_table extends Migration
      */
     public function safeUp()
     {
-        $this->addForeignKey(
-            'fk-orders-service_id',
-            'orders',
-            'service_id',
-            'services',
-            'id',
-            'CASCADE'
-        );
+        $this->execute(<<<SQL
+ALTER TABLE orders
+    ADD CONSTRAINT `fk-orders-service_id` FOREIGN KEY (service_id)
+    REFERENCES services(id)
+    ON DELETE CASCADE
+SQL);
 
-        $this->addForeignKey(
-            'fk-orders-user_id',
-            'orders',
-            'user_id',
-            'users',
-            'id',
-            'CASCADE'
-        );
+        $this->execute(<<<SQL
+ALTER TABLE orders
+    ADD CONSTRAINT `fk-orders-user_id` FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+SQL);
 
-        $this->createIndex('index-orders-status', 'orders', 'status');
+        $this->execute(<<<SQL
+CREATE INDEX `index-orders-status` on orders(status)
+SQL);
     }
 
     /**
@@ -38,8 +36,17 @@ class m230303_132122_add_indexes_to_orders_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-orders-service_id', 'orders');
-        $this->dropForeignKey('fk-orders-user_id', 'orders');
-        $this->dropIndex('index-orders-status', 'orders');
+        $this->execute(<<<SQL
+ALTER TABLE orders
+    DROP FOREIGN KEY `fk-orders-service_id`
+SQL);
+        $this->execute(<<<SQL
+ALTER TABLE orders
+    DROP FOREIGN KEY `fk-orders-user_id`
+SQL);
+
+        $this->execute(<<<SQL
+DROP INDEX `index-orders-status` ON orders
+SQL);
     }
 }

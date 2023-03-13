@@ -3,7 +3,7 @@
 namespace app\modules\order\services;
 
 use app\modules\order\models\Order;
-use app\modules\order\models\OrderSearch;
+use app\modules\order\models\search\OrderSearch;
 use app\modules\order\models\Service;
 use Yii;
 use yii2tech\csvgrid\CsvGrid;
@@ -27,11 +27,15 @@ class OrderService
             ->asArray()
             ->all();
 
-        $modes = [];
-        foreach (Order::$modes as $key => $mode) {
+        $existedModes = Order::find()
+            ->select('mode')
+            ->distinct()
+            ->all();
+
+        foreach ($existedModes as $mode) {
             $modes[] = [
-                'id' => $key,
-                'name' => $mode,
+                'id' => $mode->mode,
+                'name' => $mode->modeLabel,
             ];
         }
 
@@ -80,16 +84,12 @@ class OrderService
                 ],
                 [
                     'header' => Yii::t('app', 'Status'),
-                    'content' => function ($model) {
-                        return Yii::t('app', Order::$statuses[$model->status]);
-                    },
+                    'value' => 'statusLabel',
                 ],
                 [
                     'attribute' => 'mode',
                     'header' => Yii::t('app', 'Mode'),
-                    'content' => function ($model) {
-                        return Yii::t('app', Order::$modes[$model->mode]);
-                    }
+                    'value' => 'modeLabel',
                 ],
                 [
                     'attribute' => 'created_at',
