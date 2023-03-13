@@ -39,4 +39,5 @@ docker/mysql/data/
 docker/mysql/logs
 docker/mysql/var/*
 docker/nginx/logs
+docker/nginx/default.conf
 docker/.env
