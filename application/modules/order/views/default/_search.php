@@ -15,7 +15,7 @@ $searchValue = $queryParams['id'] ?? $queryParams['link'] ?? $queryParams['usern
 <ul class="nav nav-tabs p-b">
     <li <?php if ($isAllOrders): ?> class="active" <?php endif; ?> >
         <a href="<?= Url::toRoute('/order/default/index') ?>">
-            <?= Yii::t('app', 'All orders') ?>
+            <?= Yii::t('order', 'index.all_orders_btn') ?>
         </a>
     </li>
     <?php foreach (Order::find()->select('status')->distinct()->all() as $status): ?>
@@ -34,18 +34,18 @@ $searchValue = $queryParams['id'] ?? $queryParams['link'] ?? $queryParams['usern
                        name="search"
                        class="form-control"
                        value="<?= $searchValue ?>"
-                       placeholder="<?= Yii::t('app', 'Search orders') ?>">
+                       placeholder="<?= Yii::t('order', 'index.search_placeholder') ?>">
                 <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="search-type">
               <option value="<?= OrderSearch::PARAM_ID ?>" <?php if (!empty($queryParams[OrderSearch::PARAM_ID])): ?> selected="" <?php endif; ?>>
-                  <?= Yii::t('app', 'Order ID') ?>
+                  <?= Yii::t('order', 'order.order_id') ?>
               </option>
               <option value="<?= OrderSearch::PARAM_LINK ?>" <?php if (!empty($queryParams[OrderSearch::PARAM_LINK])): ?> selected="" <?php endif; ?>>
-                  <?= Yii::t('app', 'Link') ?>
+                  <?= Yii::t('order', 'order.link') ?>
               </option>
               <option value="<?= OrderSearch::PARAM_USERNAME ?>" <?php if (!empty($queryParams[OrderSearch::PARAM_USERNAME])): ?> selected="" <?php endif; ?>>
-                  <?= Yii::t('app', 'Username') ?>
+                  <?= Yii::t('order', 'order.username') ?>
               </option>
             </select>
                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>

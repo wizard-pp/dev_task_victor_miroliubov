@@ -2,12 +2,10 @@
 
 namespace orders\services;
 
-use DateTimeImmutable;
 use orders\models\Order;
 use orders\models\search\OrderSearch;
 use orders\models\Service;
 use Yii;
-use yii2tech\csvgrid\CsvGrid;
 
 class OrderService
 {
@@ -75,14 +73,14 @@ class OrderService
         ob_start();
 
         fputcsv($f, [
-            Yii::t('app', 'ID'),
-            Yii::t('app', 'User'),
-            Yii::t('app', 'Link'),
-            Yii::t('app', 'Quantity'),
-            Yii::t('app', 'Service'),
-            Yii::t('app', 'Status'),
-            Yii::t('app', 'Mode'),
-            Yii::t('app', 'Created'),
+            Yii::t('order', 'order.id'),
+            Yii::t('order', 'order.user'),
+            Yii::t('order', 'order.link'),
+            Yii::t('order', 'order.quantity'),
+            Yii::t('order', 'order.service'),
+            Yii::t('order', 'order.status'),
+            Yii::t('order', 'order.mode'),
+            Yii::t('order', 'order.created'),
         ]);
 
         ob_flush();

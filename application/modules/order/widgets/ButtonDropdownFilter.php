@@ -125,7 +125,7 @@ class ButtonDropdownFilter extends Widget
 
     protected function renderTotalCount(): string
     {
-        $name = Yii::t('app', 'All');
+        $name = Yii::t('order', 'dropdown_filter.all');
 
         if ($this->totalCount) {
             $name .= "({$this->totalCount})";

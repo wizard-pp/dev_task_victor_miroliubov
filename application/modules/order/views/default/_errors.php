@@ -1,16 +1,13 @@
 <?php if ($errors = Yii::$app->session->getFlash('errors')): ?>
     <div class="row-danger">
         <div class="color-danger">
-            <?= Yii::t('app', 'An error has occurred.') ?>
+            <?= Yii::t('order', 'error_message') ?>
             <ul>
                 <?php foreach ($errors as $errorKey => $errorMessages): ?>
                     <li>
-                        <b><?= Yii::t('app', $errorKey) ?></b>
-                        <ul>
-                            <?php foreach ($errorMessages as $errorMessage): ?>
-                                <li><?= Yii::t('app', $errorMessage) ?></li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <b><?= Yii::t('order', 'error_message_for_attribute', [
+                                'attribute' => $errorKey
+                            ]) ?></b>
                     </li>
                 <?php endforeach; ?>
             </ul>

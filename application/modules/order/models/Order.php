@@ -71,14 +71,14 @@ class Order extends ActiveRecord
     public function attributeLabels(): array
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'link' => Yii::t('app', 'Link'),
-            'quantity' => Yii::t('app', 'Quantity'),
-            'service_id' => Yii::t('app', 'Service ID'),
-            'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'mode' => Yii::t('app', 'Mode'),
+            'id' => Yii::t('order', 'order.id'),
+            'user_id' => Yii::t('order', 'order.user_id'),
+            'link' => Yii::t('order', 'order.link'),
+            'quantity' => Yii::t('order', 'order.quantity'),
+            'service_id' => Yii::t('order', 'order.service_id'),
+            'status' => Yii::t('order', 'order.status'),
+            'created_at' => Yii::t('order', 'order.created_at'),
+            'mode' => Yii::t('order', 'order.mode'),
         ];
     }
 
@@ -110,11 +110,11 @@ class Order extends ActiveRecord
     protected function getStatuses(): array
     {
         return [
-            self::STATUS_PENDING => Yii::t('app','Pending'),
-            self::STATUS_IN_PROGRESS => Yii::t('app', 'In Progress'),
-            self::STATUS_COMPLETED => Yii::t('app', 'Completed'),
-            self::STATUS_CANCELED => Yii::t('app', 'Canceled'),
-            self::STATUS_FAIL => Yii::t('app', 'Error'),
+            self::STATUS_PENDING => Yii::t('order','order.status.pending'),
+            self::STATUS_IN_PROGRESS => Yii::t('order', 'order.status.in_progress'),
+            self::STATUS_COMPLETED => Yii::t('order', 'order.status.completed'),
+            self::STATUS_CANCELED => Yii::t('order', 'order.status.canceled'),
+            self::STATUS_FAIL => Yii::t('order', 'order.status.error'),
         ];
     }
 
@@ -126,8 +126,8 @@ class Order extends ActiveRecord
     protected function getModes(): array
     {
         return [
-            self::MODE_MANUAL => Yii::t('app', 'Manual'),
-            self::MODE_AUTO => Yii::t('app', 'Auto'),
+            self::MODE_MANUAL => Yii::t('order', 'order.mode.manual'),
+            self::MODE_AUTO => Yii::t('order', 'order.mode.auto'),
         ];
     }
 

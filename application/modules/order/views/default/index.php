@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 if ($totalCount < $dataProvider->pagination->pageSize) {
     $summaryContent = '{totalCount}';
 } else {
-    $summaryContent = Yii::t('app', '{begin} to {end} of {totalCount}');
+    $summaryContent = Yii::t('order', 'index.table_summary');
 }
 ?>
 
@@ -30,19 +30,19 @@ if ($totalCount < $dataProvider->pagination->pageSize) {
         'id',
         [
             'attribute' => 'user',
-            'header' => Yii::t('app', 'User'),
+            'header' => Yii::t('order', 'order.user'),
             'value' => 'user.fullName',
         ],
         [
             'attribute' => 'link',
-            'header' => Yii::t('app', 'Link'),
+            'header' => Yii::t('order', 'order.link'),
             'contentOptions' => ['class' => 'link'],
         ],
         'quantity',
         [
             'attribute' => 'service',
             'header' => ButtonDropdownFilter::widget([
-                'label' => Yii::t('app', 'Service'),
+                'label' => Yii::t('order', 'order.service'),
                 'items' => $services,
                 'attribute' => 'service_id',
                 'totalCount' => $totalCount,
@@ -64,13 +64,13 @@ if ($totalCount < $dataProvider->pagination->pageSize) {
             'contentOptions' => ['class' => 'service'],
         ],
         [
-            'header' => Yii::t('app', 'Status'),
+            'header' => Yii::t('order', 'order.status'),
             'value' => 'statusLabel',
         ],
         [
             'attribute' => 'mode',
             'header' => ButtonDropdownFilter::widget([
-                'label' => Yii::t('app', 'Mode'),
+                'label' => Yii::t('order', 'order.mode'),
                 'items' => $modes,
                 'attribute' => 'mode',
             ]),
@@ -79,7 +79,7 @@ if ($totalCount < $dataProvider->pagination->pageSize) {
         ],
         [
             'attribute' => 'created_at',
-            'header' => Yii::t('app', 'Created'),
+            'header' => Yii::t('order', 'order.created'),
             'format' => ['date', 'Y-m-d H:i:s'],
             'content' => function ($model) {
                 return '<span class="nowrap">' . Yii::$app->formatter->asDate($model->created_at, 'php:Y-m-d') . '</span>'

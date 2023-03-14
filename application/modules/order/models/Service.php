@@ -40,8 +40,8 @@ class Service extends ActiveRecord
     public function attributeLabels(): array
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'id' => Yii::t('order', 'service.id'),
+            'name' => Yii::t('order', 'service.name'),
         ];
     }
 

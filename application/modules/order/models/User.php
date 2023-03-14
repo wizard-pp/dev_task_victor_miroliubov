@@ -40,9 +40,9 @@ class User extends ActiveRecord
     public function attributeLabels(): array
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'first_name' => Yii::t('app', 'First Name'),
-            'last_name' => Yii::t('app', 'Last Name'),
+            'id' => Yii::t('order', 'user.id'),
+            'first_name' => Yii::t('order', 'user.first_name'),
+            'last_name' => Yii::t('order', 'user.last_name'),
         ];
     }
 
