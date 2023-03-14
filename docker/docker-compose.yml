@@ -11,7 +11,8 @@ services:
       - ./../:/var/www:delegated
       - ./nginx/logs:/var/log/nginx
     networks:
-      - default
+      default:
+        ipv4_address: ${NGINX_INTERNAL_IP}
     links:
       - ${DOCKER_CONTAINER_PHP}
   php:
@@ -42,4 +43,12 @@ services:
       - ./mysql/logs:/var/log/mysql
       - ./mysql/my.cnf:/etc/my.cnf
     networks:
-      - default
+      default:
+        ipv4_address: ${MYSQL_INTERNAL_IP}
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/16
+          gateway: 172.16.0.1

@@ -11,6 +11,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'defaultRoute' => 'order/default/index',
     'components' => [
         'request' => [
             'cookieValidationKey' => 'FtHigA_4BMyjfHR8zNLKgAP6OzGhpy9K',
