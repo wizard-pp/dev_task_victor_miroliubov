@@ -12,7 +12,7 @@ use yii\grid\GridView;
 /** @var int $totalCount */
 /** @var string $summaryContent */
 
-$this->title = Yii::t('app', 'Orders');
+$this->title = Yii::t('order', 'index.title');
 $this->params['breadcrumbs'][] = $this->title;
 if ($totalCount < $dataProvider->pagination->pageSize) {
     $summaryContent = '{totalCount}';
