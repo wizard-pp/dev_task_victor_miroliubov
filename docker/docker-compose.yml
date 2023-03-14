@@ -35,7 +35,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASS}
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
     ports:
-      - '3306:3306'
+      - "${DOCKER_CONTAINER_MYSQL_PORT}:3306"
     expose:
       - '3306'
     volumes:
