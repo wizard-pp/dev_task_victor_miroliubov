@@ -31,11 +31,17 @@ class DefaultController extends Controller
     /**
      * Lists all Order models.
      *
-     * @return string
+     * @return Response|string
      */
-    public function actionIndex(): string
+    public function actionIndex(): Response|string
     {
-        return $this->render('index', $this->service->index($this->request->queryParams));
+        $params = $this->service->index($this->request->queryParams);
+
+        if (!$params) {
+            return $this->redirect(['/order/default/index']);
+        }
+
+        return $this->render('index', $params);
     }
 
     /**

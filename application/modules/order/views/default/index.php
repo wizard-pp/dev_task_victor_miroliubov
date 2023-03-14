@@ -22,6 +22,7 @@ if ($totalCount < $dataProvider->pagination->pageSize) {
 ?>
 
 <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php echo $this->render('_errors'); ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

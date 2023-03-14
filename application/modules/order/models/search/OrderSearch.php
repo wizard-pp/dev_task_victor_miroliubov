@@ -43,9 +43,9 @@ class OrderSearch extends Order
      *
      * @param array $params
      *
-     * @return ActiveDataProvider
+     * @return ActiveDataProvider|bool
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params): ActiveDataProvider|bool
     {
         $query = Order::find();
 
@@ -64,8 +64,7 @@ class OrderSearch extends Order
         $this->load($params);
 
         if (!$this->validate()) {
-            $query->where('0=1');
-            return $dataProvider;
+            return false;
         }
 
         // grid filtering conditions

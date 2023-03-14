@@ -13,14 +13,14 @@ $searchValue = $queryParams['id'] ?? $queryParams['link'] ?? $queryParams['usern
 
 <ul class="nav nav-tabs p-b">
     <li <?php if ($isAllOrders): ?> class="active" <?php endif; ?> >
-        <a href="<?= Url::toRoute('order/index') ?>">
+        <a href="<?= Url::toRoute('/order/default/index') ?>">
             <?= Yii::t('app', 'All orders') ?>
         </a>
     </li>
     <?php foreach (Order::find()->select('status')->distinct()->all() as $status): ?>
-        <?php $isActive = isset($orderSearch['status']) && $orderSearch['status'] == $status->status; ?>
+        <?php $isActive = isset($queryParams['status']) && $queryParams['status'] == $status->status; ?>
         <li <?php if ($isActive): ?> class="active" <?php endif; ?>>
-            <a href="<?= Url::toRoute(['order/index', ['status' => $status->status]]) ?>">
+            <a href="<?= Url::toRoute(['/order/default/index', 'status' => $status->status]) ?>">
                 <?= $status->statusLabel ?>
             </a>
         </li>

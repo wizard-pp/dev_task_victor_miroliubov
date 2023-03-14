@@ -2945,3 +2945,10 @@ input[type="checkbox"].selectOrder{
   }
 }
 
+.row-danger {
+  background-color: #ffc6bd;
+}
+
+.color-danger {
+  color: #ff212d;
+}

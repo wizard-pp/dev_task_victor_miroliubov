@@ -15,12 +15,17 @@ class OrderService
      * Order's index page setup.
      *
      * @param array $requestData
-     * @return array of index page params
+     * @return array|bool array of index page params or false if validation fails
      */
-    public function index(array $requestData): array
+    public function index(array $requestData): array|bool
     {
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search($requestData);
+
+        if (!$dataProvider) {
+            Yii::$app->session->setFlash('errors', $searchModel->getErrors());
+            return false;
+        }
 
         $services = Service::find()
             ->select([
