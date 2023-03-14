@@ -47,10 +47,10 @@ class DefaultController extends Controller
      */
     public function actionCsv(): Response
     {
+        header('Content-Disposition: attachment;filename="export.csv"');
         $f = $this->service->csv($this->request->queryParams);
 
         $response = Yii::$app->getResponse();
-        $response->on(Response::EVENT_AFTER_SEND, [$this, 'delete']);
         return $response->sendStreamAsFile($f, 'export.csv');
     }
 }

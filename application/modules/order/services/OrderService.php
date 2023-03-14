@@ -64,9 +64,8 @@ class OrderService
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search($requestData);
 
-        $mb20 = 20 * 1024 * 1024;
         // open raw memory as file so no temp files needed, you might run out of memory though
-        $f = fopen('php://temp/maxmemory:' . $mb20, 'w');
+        $f = fopen('php://output', 'w');
 
         ob_start();
 
@@ -97,11 +96,10 @@ class OrderService
                     date('Y-m-d H:i:s', $line->created_at),
                 ]);
 
+                ob_flush();
+                flush();
             }
-            ob_flush();
-            flush();
         }
-//        dd('hello');
 
         ob_end_clean();
 
