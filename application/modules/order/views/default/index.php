@@ -45,7 +45,6 @@ if ($totalCount < $dataProvider->pagination->pageSize) {
                 'items' => $services,
                 'attribute' => 'service_id',
                 'totalCount' => $totalCount,
-                'filterModel' => $searchModel,
             ]),
             'headerOptions' => ['class' => 'dropdown-th'],
             'content' => function ($model) {
@@ -73,7 +72,6 @@ if ($totalCount < $dataProvider->pagination->pageSize) {
                 'label' => Yii::t('app', 'Mode'),
                 'items' => $modes,
                 'attribute' => 'mode',
-                'filterModel' => $searchModel,
             ]),
             'headerOptions' => ['class' => 'dropdown-th'],
             'value' => 'modeLabel',

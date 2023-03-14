@@ -86,4 +86,9 @@ class OrderSearch extends Order
 
         return $dataProvider;
     }
+
+    public function formName(): string
+    {
+        return '';
+    }
 }

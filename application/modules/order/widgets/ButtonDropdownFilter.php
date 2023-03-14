@@ -45,20 +45,6 @@ class ButtonDropdownFilter extends Widget
 
     public string $attribute;
 
-    public ActiveRecord $filterModel;
-
-    protected string $filterModelName;
-    /**
-     * {@inheritdoc}
-     */
-    public function init()
-    {
-        parent::init();
-
-        $filterModelSegments = explode('\\', $this->filterModel::class);
-        $this->filterModelName = $filterModelSegments[array_key_last($filterModelSegments)];
-    }
-
     /**
      * {@inheritdoc}
      * @return string
@@ -117,7 +103,7 @@ class ButtonDropdownFilter extends Widget
         }
         $content .= $item['name'];
         $content = Html::tag('a', $content, [
-            'href' => $this->getUrl(["{$this->filterModelName}" => [$this->attribute => $item['id']]]),
+            'href' => $this->getUrl([$this->attribute => $item['id']]),
         ]);
 
         $liOptions = [];
@@ -152,7 +138,7 @@ class ButtonDropdownFilter extends Widget
 
     protected function isActiveItem(array $item): bool
     {
-        $currentFilter = Yii::$app->request->get($this->filterModelName);
+        $currentFilter = Yii::$app->request->queryParams;
 
         if (!is_array($currentFilter) || !array_key_exists($this->attribute, $currentFilter)) {
             return $item['id'] === null;

@@ -5,14 +5,10 @@ use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 
-$orderSearch = Yii::$app->request->get('OrderSearch');
-$isAllOrders = is_null($orderSearch)|| !isset($orderSearch['status']);
 $queryParams = Yii::$app->request->queryParams;
-$targetQueryParams = $queryParams;
-unset($targetQueryParams['r']);
-$targetQueryParams[0] = '/' . Yii::$app->controller->getRoute();
 
-$searchValue = $queryParams['OrderSearch']['id'] ?? $queryParams['OrderSearch']['link'] ?? $queryParams['OrderSearch']['username'] ?? '';
+$isAllOrders = is_null($queryParams)|| !isset($queryParams['status']);
+$searchValue = $queryParams['id'] ?? $queryParams['link'] ?? $queryParams['username'] ?? '';
 ?>
 
 <ul class="nav nav-tabs p-b">
@@ -22,10 +18,9 @@ $searchValue = $queryParams['OrderSearch']['id'] ?? $queryParams['OrderSearch'][
         </a>
     </li>
     <?php foreach (Order::find()->select('status')->distinct()->all() as $status): ?>
-        <?php $targetQueryParams = array_replace_recursive($targetQueryParams, ['OrderSearch' => ['status' => $status->status]]); ?>
         <?php $isActive = isset($orderSearch['status']) && $orderSearch['status'] == $status->status; ?>
         <li <?php if ($isActive): ?> class="active" <?php endif; ?>>
-            <a href="<?= Url::toRoute($targetQueryParams) ?>">
+            <a href="<?= Url::toRoute(['order/index', ['status' => $status->status]]) ?>">
                 <?= $status->statusLabel ?>
             </a>
         </li>
@@ -42,13 +37,13 @@ $searchValue = $queryParams['OrderSearch']['id'] ?? $queryParams['OrderSearch'][
                 <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="search-type">
-              <option value="OrderSearch[id]" <?php if (!empty($queryParams['OrderSearch']['id'])): ?> selected="" <?php endif; ?>>
+              <option value="id" <?php if (!empty($queryParams['id'])): ?> selected="" <?php endif; ?>>
                   <?= Yii::t('app', 'Order ID') ?>
               </option>
-              <option value="OrderSearch[link]" <?php if (!empty($queryParams['OrderSearch']['link'])): ?> selected="" <?php endif; ?>>
+              <option value="link" <?php if (!empty($queryParams['link'])): ?> selected="" <?php endif; ?>>
                   <?= Yii::t('app', 'Link') ?>
               </option>
-              <option value="OrderSearch[username]" <?php if (!empty($queryParams['OrderSearch']['username'])): ?> selected="" <?php endif; ?>>
+              <option value="username" <?php if (!empty($queryParams['username'])): ?> selected="" <?php endif; ?>>
                   <?= Yii::t('app', 'Username') ?>
               </option>
             </select>
@@ -68,7 +63,7 @@ $('#search-form').on('submit', function (e) {
     let paramValue = $(this).find('[name=search]').val();
     
     let href = $(this).attr('action');
-    href = removeUrlParams(href, ['OrderSearch\[id\]', 'OrderSearch\[link\]', 'OrderSearch\[username\]', 'OrderSearch\[service_id\]', 'OrderSearch\[mode_id\]']);
+    href = removeUrlParams(href, ['id', 'link', 'username', 'service_id', 'mode_id', 'page']);
 
     href = replaceUrlParam(href, paramName, paramValue);
 
