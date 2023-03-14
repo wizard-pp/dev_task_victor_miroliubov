@@ -1,6 +1,7 @@
 <?php
 
 use orders\models\Order;
+use orders\models\search\OrderSearch;
 use yii\helpers\Url;
 
 /** @var yii\web\View $this */
@@ -37,17 +38,17 @@ $searchValue = $queryParams['id'] ?? $queryParams['link'] ?? $queryParams['usern
                 <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="search-type">
-              <option value="id" <?php if (!empty($queryParams['id'])): ?> selected="" <?php endif; ?>>
+              <option value="<?= OrderSearch::PARAM_ID ?>" <?php if (!empty($queryParams[OrderSearch::PARAM_ID])): ?> selected="" <?php endif; ?>>
                   <?= Yii::t('app', 'Order ID') ?>
               </option>
-              <option value="link" <?php if (!empty($queryParams['link'])): ?> selected="" <?php endif; ?>>
+              <option value="<?= OrderSearch::PARAM_LINK ?>" <?php if (!empty($queryParams[OrderSearch::PARAM_LINK])): ?> selected="" <?php endif; ?>>
                   <?= Yii::t('app', 'Link') ?>
               </option>
-              <option value="username" <?php if (!empty($queryParams['username'])): ?> selected="" <?php endif; ?>>
+              <option value="<?= OrderSearch::PARAM_USERNAME ?>" <?php if (!empty($queryParams[OrderSearch::PARAM_USERNAME])): ?> selected="" <?php endif; ?>>
                   <?= Yii::t('app', 'Username') ?>
               </option>
             </select>
-            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
             </div>
         </form>
@@ -66,6 +67,7 @@ $('#search-form').on('submit', function (e) {
     href = removeUrlParams(href, ['id', 'link', 'username', 'service_id', 'mode_id', 'page']);
 
     href = replaceUrlParam(href, paramName, paramValue);
+    href = replaceUrlParam(href, 'searchType', paramName);
 
     window.location.href = href;
 

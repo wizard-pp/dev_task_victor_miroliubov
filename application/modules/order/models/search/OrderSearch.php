@@ -16,6 +16,11 @@ class OrderSearch extends Order
     public string $user;
     public string $service;
     public ?string $username = null;
+    public ?string $searchType = null;
+
+    const PARAM_ID = 'id';
+    const PARAM_LINK = 'link';
+    const PARAM_USERNAME = 'username';
 
     /**
      * {@inheritdoc}
@@ -25,7 +30,7 @@ class OrderSearch extends Order
         return [
             [['id', 'user_id', 'quantity', 'service_id', 'status', 'created_at', 'mode'], 'integer'],
             [['link'], 'safe'],
-            [['user', 'service', 'username'], 'safe'],
+            [['user', 'service', 'username', 'searchType'], 'safe'],
         ];
     }
 
@@ -69,17 +74,23 @@ class OrderSearch extends Order
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'orders.id' => $this->id,
-            'orders.user_id' => $this->user_id,
             'orders.service_id' => $this->service_id,
             'orders.status' => $this->status,
             'orders.mode' => $this->mode,
         ]);
 
-        $query->andFilterWhere(['like', 'orders.link', $this->link]);
-
-        $query->andFilterWhere(['like', 'users.first_name', $this->username])
-            ->orFilterWhere(['like', 'users.last_name', $this->username]);
+        switch ($this->searchType) {
+            case self::PARAM_ID:
+                $query->andFilterWhere(['orders.id' => $this->id]);
+                break;
+            case self::PARAM_LINK:
+                $query->andFilterWhere(['like', 'orders.link', $this->link]);
+                break;
+            case self::PARAM_USERNAME:
+                $query->andFilterWhere(['like', 'users.first_name', $this->username])
+                    ->orFilterWhere(['like', 'users.last_name', $this->username]);
+                break;
+        }
 
         $query->orderBy(['orders.id' => SORT_DESC]);
 
