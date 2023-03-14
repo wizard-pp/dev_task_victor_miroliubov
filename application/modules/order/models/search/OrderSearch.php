@@ -97,6 +97,11 @@ class OrderSearch extends Order
         return $dataProvider;
     }
 
+    /**
+     * Set empty form name to avoid displaying OrderSearch[] in search get request.
+     *
+     * @return string
+     */
     public function formName(): string
     {
         return '';

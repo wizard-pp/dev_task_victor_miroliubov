@@ -61,8 +61,13 @@ class OrderService
         ];
     }
 
-
-    public function csv(array $requestData, $filename = 'import.csv')
+    /**
+     * Generating output stream with csv export
+     *
+     * @param array $requestData
+     * @return false|resource
+     */
+    public function csv(array $requestData)
     {
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search($requestData);

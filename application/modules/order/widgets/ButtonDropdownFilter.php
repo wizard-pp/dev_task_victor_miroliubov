@@ -85,6 +85,11 @@ class ButtonDropdownFilter extends Widget
         return $html;
     }
 
+    /**
+     * Rendering dropdown list element
+     *
+     * @return string
+     */
     protected function renderList(): string
     {
         $content = $this->renderTotalCount();
@@ -95,6 +100,12 @@ class ButtonDropdownFilter extends Widget
         return $content;
     }
 
+    /**
+     * Rendering an element for dropdown list
+     *
+     * @param array $item
+     * @return string
+     */
     protected function renderListItem(array $item): string
     {
         $content = '';
@@ -113,6 +124,12 @@ class ButtonDropdownFilter extends Widget
         return Html::tag('li', $content, $liOptions);
     }
 
+    /**
+     * Generating search url for filter
+     *
+     * @param array $withFilter
+     * @return string
+     */
     protected function getUrl(array $withFilter): string
     {
         $queryParams = Yii::$app->request->queryParams;
@@ -123,6 +140,11 @@ class ButtonDropdownFilter extends Widget
         return Url::toRoute($targetQueryParams);
     }
 
+    /**
+     * Rendering empty filter
+     *
+     * @return string
+     */
     protected function renderTotalCount(): string
     {
         $name = Yii::t('order', 'dropdown_filter.all');
@@ -136,6 +158,12 @@ class ButtonDropdownFilter extends Widget
         ]);
     }
 
+    /**
+     * Checks if current dropdown filter list item is active
+     *
+     * @param array $item
+     * @return bool
+     */
     protected function isActiveItem(array $item): bool
     {
         $currentFilter = Yii::$app->request->queryParams;
