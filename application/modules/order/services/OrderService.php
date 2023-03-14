@@ -64,8 +64,9 @@ class OrderService
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search($requestData);
 
+        $mb20 = 20 * 1024 * 1024;
         // open raw memory as file so no temp files needed, you might run out of memory though
-        $f = fopen('php://memory', 'w');
+        $f = fopen('php://temp/maxmemory:' . $mb20, 'w');
 
         ob_start();
 
@@ -100,11 +101,11 @@ class OrderService
             ob_flush();
             flush();
         }
+//        dd('hello');
 
         ob_end_clean();
 
         fseek($f, 0);
-
 
         return $f;
     }
