@@ -3,7 +3,11 @@
 namespace orders\controllers;
 
 use orders\services\OrderService;
+use Yii;
+use yii\base\InvalidConfigException;
 use yii\web\Controller;
+use yii\web\RangeNotSatisfiableHttpException;
+use yii\web\Response;
 
 /**
  * Default controller for the `order` module
@@ -15,9 +19,9 @@ class DefaultController extends Controller
     /**
      * @param $id
      * @param $module
-     * @param $config
+     * @param array $config
      */
-    public function __construct($id, $module, $config = [])
+    public function __construct($id, $module, array $config = [])
     {
         parent::__construct($id, $module, $config);
 
@@ -37,13 +41,16 @@ class DefaultController extends Controller
     /**
      * Exports orders to .csv file
      *
-     * @return \yii\web\Response
-     * @throws \yii\base\InvalidConfigException
+     * @return Response
+     * @throws InvalidConfigException
+     * @throws RangeNotSatisfiableHttpException
      */
-    public function actionCsv(): \yii\web\Response
+    public function actionCsv(): Response
     {
-        $exporter = $this->service->csv($this->request->queryParams);
+        $f = $this->service->csv($this->request->queryParams);
 
-        return $exporter->export()->send('items.csv');
+        $response = Yii::$app->getResponse();
+        $response->on(Response::EVENT_AFTER_SEND, [$this, 'delete']);
+        return $response->sendStreamAsFile($f, 'export.csv');
     }
 }

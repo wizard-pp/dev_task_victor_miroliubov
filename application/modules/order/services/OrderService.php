@@ -2,6 +2,7 @@
 
 namespace orders\services;
 
+use DateTimeImmutable;
 use orders\models\Order;
 use orders\models\search\OrderSearch;
 use orders\models\Service;
@@ -57,51 +58,79 @@ class OrderService
         ];
     }
 
-    /**
-     * Setup CsvGrid for orders exporting to csv.
-     *
-     * @param array $requestData
-     * @return CsvGrid for orders
-     */
-    public function csv(array $requestData): CsvGrid
+
+    public function csv(array $requestData, $filename = 'import.csv')
     {
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search($requestData);
 
-        return new CsvGrid([
-            'dataProvider' => $dataProvider,
-            'columns' => [
-                'id',
-                [
-                    'attribute' => 'user',
-                    'header' => Yii::t('app', 'User'),
-                    'value' => 'user.fullName',
-                ],
-                [
-                    'attribute' => 'link',
-                    'header' => Yii::t('app', 'Link'),
-                ],
-                'quantity',
-                [
-                    'attribute' => 'service',
-                    'header' => Yii::t('app', 'Service'),
-                    'value' => 'service.name',
-                ],
-                [
-                    'header' => Yii::t('app', 'Status'),
-                    'value' => 'statusLabel',
-                ],
-                [
-                    'attribute' => 'mode',
-                    'header' => Yii::t('app', 'Mode'),
-                    'value' => 'modeLabel',
-                ],
-                [
-                    'attribute' => 'created_at',
-                    'header' => Yii::t('app', 'Created'),
-                    'format' => ['date', 'Y-m-d H:i:s'],
-                ],
-            ],
+        // open raw memory as file so no temp files needed, you might run out of memory though
+        $f = fopen('php://memory', 'w');
+
+        ob_start();
+
+        fputcsv($f, [
+            Yii::t('app', 'ID'),
+            Yii::t('app', 'User'),
+            Yii::t('app', 'Link'),
+            Yii::t('app', 'Quantity'),
+            Yii::t('app', 'Service'),
+            Yii::t('app', 'Status'),
+            Yii::t('app', 'Mode'),
+            Yii::t('app', 'Created'),
         ]);
+
+        ob_flush();
+
+        $page = 0;
+        while (($data = $this->batchModels($dataProvider, $dataProvider->pagination, $page)) !== false) {
+            foreach ($data as $line) {
+                fputcsv($f, [
+                    $line->id,
+                    $line->user->fullName,
+                    $line->link,
+                    $line->quantity,
+                    $line->service->name,
+                    $line->statusLabel,
+                    $line->modeLabel,
+                    date('Y-m-d H:i:s', $line->created_at),
+                ]);
+
+            }
+            ob_flush();
+            flush();
+        }
+
+        ob_end_clean();
+
+        fseek($f, 0);
+
+
+        return $f;
     }
+
+
+    /**
+     * Iterates over {@see dataProvider} returning data by batches.
+     * @return array|false models list.
+     */
+    protected function batchModels($dataProvider, $pagination, &$page)
+    {
+            if ($pagination === false || $pagination->pageCount === 0) {
+                if ($page === 0) {
+                    $page++;
+                    return $dataProvider->getModels();
+                }
+            } else {
+                if ($page < $pagination->pageCount) {
+                    $pagination->setPage($page);
+                    $dataProvider->prepare(true);
+                    $page++;
+                    return $dataProvider->getModels();
+                }
+            }
+
+            return false;
+    }
+
 }

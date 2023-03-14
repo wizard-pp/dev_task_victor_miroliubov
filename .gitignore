@@ -41,3 +41,5 @@ docker/mysql/var/
 docker/nginx/logs
 docker/nginx/default.conf
 docker/.env
+
+application/web/phpinfo.php
