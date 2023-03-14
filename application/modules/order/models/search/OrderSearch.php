@@ -56,6 +56,7 @@ class OrderSearch extends Order
             'query' => $query,
             'pagination' => [
                 'pageSize' => self::PAGE_SIZE,
+                'pageSizeParam' => false
             ],
             'sort' => false
         ]);
