@@ -56,6 +56,9 @@ $searchValue = $queryParams['id'] ?? $queryParams['link'] ?? $queryParams['usern
 </ul>
 
 <?php
+$constId = OrderSearch::PARAM_ID;
+$constLink = OrderSearch::PARAM_LINK;
+$constUsername = OrderSearch::PARAM_USERNAME;
 $this->registerJs(<<<SCRIPT
 $('#search-form').on('submit', function (e) {
     e.preventDefault();
@@ -64,7 +67,11 @@ $('#search-form').on('submit', function (e) {
     let paramValue = $(this).find('[name=search]').val();
     
     let href = $(this).attr('action');
-    href = removeUrlParams(href, ['id', 'link', 'username', 'service_id', 'mode_id', 'page']);
+    href = removeUrlParams(href, ['{$constId}', '{$constLink}', '{$constUsername}', 'service_id', 'mode_id', 'page']);
+    
+    if (paramName == '{$constLink}') {
+        paramValue = encodeURIComponent(paramValue);
+    }
 
     href = replaceUrlParam(href, paramName, paramValue);
     href = replaceUrlParam(href, 'searchType', paramName);
