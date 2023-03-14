@@ -71,10 +71,8 @@ class OrderSearch extends Order
         $query->andFilterWhere([
             'orders.id' => $this->id,
             'orders.user_id' => $this->user_id,
-            'orders.quantity' => $this->quantity,
             'orders.service_id' => $this->service_id,
             'orders.status' => $this->status,
-            'orders.created_at' => $this->created_at,
             'orders.mode' => $this->mode,
         ]);
 

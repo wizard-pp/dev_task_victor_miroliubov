@@ -68,7 +68,7 @@ $('#search-form').on('submit', function (e) {
     let paramValue = $(this).find('[name=search]').val();
     
     let href = $(this).attr('action');
-    href = removeUrlParams(href, ['OrderSearch\[id\]', 'OrderSearch\[link\]', 'OrderSearch\[username\]']);
+    href = removeUrlParams(href, ['OrderSearch\[id\]', 'OrderSearch\[link\]', 'OrderSearch\[username\]', 'OrderSearch\[service_id\]', 'OrderSearch\[mode_id\]']);
 
     href = replaceUrlParam(href, paramName, paramValue);
 

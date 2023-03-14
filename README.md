@@ -27,8 +27,6 @@ The minimum requirement by this project template that your Web server supports P
 INSTALLATION
 ------------
 
-Copy database structure and data files to ```docker/mysql/data/``` and then:
-
 ```
 cp application/.env_example application/.env
 cp docker/nginx/default.conf_example docker/nginx/default.conf
@@ -44,3 +42,7 @@ CONFIG
 2. Set docker local ip at ```/application/config/web.php``` at section ```modules.gii.allowedIPs``` if you wanna use gii.
 3. Apply database migrations.
 4. Profit!
+
+START
+-----
+Open your browser and go to ```http://localhost```
